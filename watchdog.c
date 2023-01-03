@@ -56,17 +56,20 @@ int main()
     gettimeofday(&start, 0);
 
     while(1){ // Every loops we gonna check if the timer not equal or taller to 10000ms == 10s
+        int ContinueProg = 0;
         gettimeofday(&end,NULL);
         TimeElapse = (end.tv_sec - start.tv_sec) * 1000.0f + (end.tv_usec - start.tv_usec) / 1000.0f;
         if(TimeElapse >= 10000){ // if the counter of time taller of 10000ms == 10s we gonna send a TCP message
+            ContinueProg = 1;
+            send(sock, &ContinueProg, sizeof(int), 0);
             break;
         }
+        send(sock, &ContinueProg, sizeof(int), 0);
+        
     }
     // Sends some data to server
-    char message[] = "server can't be reached\n";
-    int messageLen = strlen(message) + 1;
-
-    int bytesSent = send(sock, message, messageLen, 0);
+    int flagTime = 1;
+    int bytesSent = send(sock, &flagTime, sizeof(int), 0);
 
     if (-1 == bytesSent)
     {
@@ -75,10 +78,6 @@ int main()
     else if (0 == bytesSent)
     {
         printf("peer has closed the TCP connection prior to send().\n");
-    }
-    else if (messageLen > bytesSent)
-    {
-        printf("sent only %d bytes from the required %d.\n", bytesSent, messageLen);
     }
 
     close(sock);
