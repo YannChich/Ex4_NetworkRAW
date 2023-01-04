@@ -122,7 +122,6 @@ int main(int argc, char *argv[])
         // compiled watchdog.c by makefile
         args[0] = "./watchdog";
         args[1] = NULL;
-        int status;
         int pid = fork();
         if (pid == 0)
         {
