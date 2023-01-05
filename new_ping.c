@@ -197,6 +197,9 @@ int main(int argc, char *argv[])
                 // Trying to receive an ICMP ECHO REPLAY packet.
                 bytes_received = recvfrom(sock, packet, sizeof(packet), 0, (struct sockaddr *)&dest_in, &len);
 
+                if(bytes_received > 0){
+                    break;
+                } 
                 if(bytes_received == -1){
                     recv(clientSocket, &Timercount, sizeof(int),0);     
                 }
