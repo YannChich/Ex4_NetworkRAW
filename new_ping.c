@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
     //============================================Non-Blocking Socket===================================================
     int flags = fcntl(sock, F_GETFL, 0);
-    flags = fcntl(sock, F_SETFL, flags | O_NONBLOCK);
+    flags = fcntl(sock, F_SETFL, flags | O_NONBLOCK); 
     //==================================================================================================================
     while (1)
     {

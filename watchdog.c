@@ -64,7 +64,6 @@ int main()
             send(sock, &ContinueProg, sizeof(int), 0);
             break;
         }
-        send(sock, &ContinueProg, sizeof(int), 0);
         
     }
     // Sends some data to server
